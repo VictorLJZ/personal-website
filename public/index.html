@@ -2,16 +2,12 @@
 <html>
 <head>
     <title>VictorLJZ</title>
-    <script src="config.js"></script>
     <style>
         body {
             max-width: 600px;
             margin: 40px auto;
             padding: 0 10px;
             line-height: 1.5;
-        }
-        textarea {
-            width: 100%;
         }
     </style>
 </head>
@@ -20,43 +16,10 @@
     <p>And you're looking at my homepage.</p>
     
     <p>
-        <a href="/">Home</a> | 
         <a href="https://victorljz.substack.com/">Blog</a> | 
         <a href="https://x.com/victor_ljz">Twitter</a> | 
-        <a href="https://www.linkedin.com/in/victor-lijunzhe/">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/victor-lijunzhe/">LinkedIn</a> | 
+        <a href="https://www.admonymous.co/victorljz">Admonymous</a>
     </p>
-
-    <h3>Leave an Anonymous Message</h3>
-    <form id="messageForm">
-        <textarea id="message" rows="4"></textarea><br>
-        <button type="submit">Submit Message</button>
-    </form>
-    <div id="formStatus"></div>
-
-    <script>
-        document.getElementById('messageForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const message = document.getElementById('message').value;
-            const statusDiv = document.getElementById('formStatus');
-            try {
-                const response = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/messages`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_CONFIG.key
-                    },
-                    body: JSON.stringify({ message })
-                });
-                if (response.ok) {
-                    statusDiv.textContent = 'Message sent successfully!';
-                    document.getElementById('message').value = '';
-                } else {
-                    throw new Error('Failed to send message');
-                }
-            } catch (error) {
-                statusDiv.textContent = 'Error sending message. Please try again.';
-            }
-        });
-    </script>
 </body>
 </html>
