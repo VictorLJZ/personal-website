@@ -28,13 +28,13 @@
     <div id="loginForm">
         <h3>Login</h3>
         <form id="adminLogin">
-            <input type="password" id="password" placeholder="Admin password" required>
+            <input type="password" id="password" placeholder="Admin password"><br>
             <button type="submit">Login</button>
         </form>
         <div id="loginStatus"></div>
     </div>
 
-    <div id="messagesSection" class="hidden">
+    <div id="messagesSection" style="display: none;">
         <h3>Messages</h3>
         <div id="messagesList"></div>
     </div>
@@ -63,8 +63,8 @@
                 const data = await response.json();
                 if (response.ok) {
                     authToken = data.access_token;
-                    document.getElementById('loginForm').classList.add('hidden');
-                    document.getElementById('messagesSection').classList.remove('hidden');
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('messagesSection').style.display = 'block';
                     loadMessages();
                 } else {
                     throw new Error('Invalid credentials');
@@ -85,7 +85,7 @@
                 });
                 const messages = await response.json();
                 messagesList.innerHTML = `
-                    <table>
+                    <table border="1">
                         <tr><th>Message</th><th>Date</th><th>Actions</th></tr>
                         ${messages.map(msg => `
                             <tr>
@@ -97,7 +97,7 @@
                     </table>
                 `;
             } catch (error) {
-                messagesList.innerHTML = 'Error loading messages';
+                messagesList.textContent = 'Error loading messages';
             }
         }
 
